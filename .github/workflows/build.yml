@@ -11,25 +11,25 @@ env:
   BUILD_TYPE: Debug
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  # build-linux:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
 
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
-        sudo apt install libgl-dev
+  #   - name: Install dependencies
+  #     run: |
+  #       sudo apt update
+  #       sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
+  #       sudo apt install libgl-dev
 
-    - name: Configure CMake
-      run: cmake --preset=linux-gcc-debug
+  #   - name: Configure CMake
+  #     run: cmake --preset=linux-gcc-debug
 
-    - name: Build
-      run: cmake --preset=linux-gcc-debug
+  #   - name: Build
+  #     run: cmake --build --preset=linux-gcc-debug
 
   build-mac:
     runs-on: macos-latest
@@ -39,53 +39,56 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Echo system
+        run: cmake -Bbuild .
+
       - name: Config CMake
         run: cmake --preset=macos-xcode-debug
       - name: Build
-        run: cmake --preset=macos-xcode-debug
+        run: cmake --build --preset=macos-xcode-debug
 
-  build-windows-vs:
-    runs-on: windows-latest
+  # build-windows-vs:
+  #   runs-on: windows-latest
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
 
-    - name: Configure CMake with Visual Studio
-      run: cmake -Bbuild .
+  #   - name: Configure CMake with Visual Studio
+  #     run: cmake -Bbuild .
 
-    - name: Build with Visual Studio
-      run: cmake --build build --config ${{env.BUILD_TYPE}} --parallel
+  #   - name: Build with Visual Studio
+  #     run: cmake --build build --config ${{env.BUILD_TYPE}} --parallel
 
-  build-windows-mingw:
-    runs-on: windows-latest
+  # build-windows-mingw:
+  #   runs-on: windows-latest
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
 
-    - name: Configure CMake
-      run: cmake --preset=windows-mingw-debug
+  #   - name: Configure CMake
+  #     run: cmake --preset=windows-mingw-debug
 
-    - name: Build
-      run: cmake --build out/build/windows-mingw-debug
+  #   - name: Build
+  #     run: cmake --build out/build/windows-mingw-debug
 
-  build-web:
-    runs-on: ubuntu-latest
+  # build-web:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
 
-      - name: Install and activate emsdk
-        run: |
-          git clone --depth=1 https://github.com/emscripten-core/emsdk.git
-          cd emsdk
-          ./emsdk install latest
-          ./emsdk activate latest
-          source ./emsdk_env.sh
-          echo "$PATH" >> $GITHUB_PATH
-          cd ..
+  #     - name: Install and activate emsdk
+  #       run: |
+  #         git clone --depth=1 https://github.com/emscripten-core/emsdk.git
+  #         cd emsdk
+  #         ./emsdk install latest
+  #         ./emsdk activate latest
+  #         source ./emsdk_env.sh
+  #         echo "$PATH" >> $GITHUB_PATH
+  #         cd ..
