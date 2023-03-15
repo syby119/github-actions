@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-windows-vs:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Configure CMake with Visual Studio
+      run: cmake --preset=windows-vs-debug
+
+    - name: Build with Visual Studio
+      run: cmake --build --preset=windows-vs-debug
