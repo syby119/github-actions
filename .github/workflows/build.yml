@@ -45,6 +45,11 @@ jobs:
       - name: Build
         run: cmake --build --preset=macos-xcode-debug
 
+      - name: Test
+        run: |
+            cd out/build/macos-xcode-debug/bin/Debug
+            ./github-actions-test
+
   # build-windows-vs:
   #   runs-on: windows-latest
 
