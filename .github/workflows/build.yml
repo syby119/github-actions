@@ -39,11 +39,9 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Echo system
-        run: cmake -Bbuild .
-
       - name: Config CMake
         run: cmake --preset=macos-xcode-debug
+
       - name: Build
         run: cmake --build --preset=macos-xcode-debug
 

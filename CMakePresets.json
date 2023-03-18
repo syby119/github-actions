@@ -241,7 +241,7 @@
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
-        "rhs": "MacOS"
+        "rhs": "Darwin"
       }
     },
     {
